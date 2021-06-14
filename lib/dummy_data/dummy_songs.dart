@@ -4,8 +4,9 @@ import '../models/song.dart';
 
 const DUMMY_SONGS = const [
   Song(
-    id: 's1',
+    songId: 's1',
     songName: 'Starboy',
+    artistId: 'a1',
     artistName: 'Weeknd',
     albumName: 'Starboy (Album)',
     artistImageUrl:

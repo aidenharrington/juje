@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import './home_screen.dart';
-import './play_screen.dart';
+import './music_screen.dart';
+import './profile_screen.dart';
+import './settings_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   @override
@@ -9,26 +11,15 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  //late List<Map<String, Object>> _pages;
   late List<Widget> _pages;
 
   int _selectedPageIndex = 0;
 
   @override
   void initState() {
-    // _pages = [
-    //   {
-    //     'page': HomeScreen(),
-    //     'title': 'Home',
-    //   },
-    //   {
-    //     'page': PlayScreen(),
-    //     'title': 'Play',
-    //   },
-    // ];
     _pages = [
       HomeScreen(),
-      PlayScreen(),
+      MusicScreen(),
     ];
     super.initState();
   }
@@ -43,10 +34,29 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'juje',
-          style: Theme.of(context).textTheme.headline6,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Text(
+            'juje',
+            style: Theme.of(context).textTheme.headline6,
+          ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, ProfileScreen.routeName);
+            },
+            icon: Icon(Icons.person),
+            color: Theme.of(context).accentColor,
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, SettingsScreen.routeName);
+            },
+            icon: Icon(Icons.settings),
+            color: Theme.of(context).accentColor,
+          )
+        ],
         backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: _pages[_selectedPageIndex],
@@ -56,14 +66,16 @@ class _TabsScreenState extends State<TabsScreen> {
         unselectedItemColor: Theme.of(context).primaryColor,
         selectedItemColor: Theme.of(context).accentColor,
         currentIndex: _selectedPageIndex,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.play_arrow),
-            label: 'Play',
+            icon: Icon(Icons.music_note),
+            label: 'Music',
           ),
         ],
       ),
